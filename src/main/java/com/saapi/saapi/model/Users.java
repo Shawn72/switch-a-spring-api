@@ -1,14 +1,14 @@
 package com.saapi.saapi.model;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 
+import lombok.Data;
 
+@Data
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"username"}),
+        @UniqueConstraint(columnNames = {"email"} )} )
 public class Users {
 	 @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,37 @@ public class Users {
      @Column(name="lname")
      private String lname;
      
-     @Column(name="email")
+     @Column(name="username")
+     private String username; 
+
+	 @Column(name="email")
      private String email;
      
      @Column(name="password")
      private String password;
+     
+     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+     @JoinTable(name = "user_roles", 
+     joinColumns = @JoinColumn(name = "user_id",  referencedColumnName = "id"), 
+     inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+     
+     private Set<Role> roles; 
+     
+     public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 	public int getId() {
 		return id;
@@ -66,5 +92,6 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
 }
