@@ -41,7 +41,7 @@ public class AuthController {
                 loginDto.getUsernameOrEmail(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("User logged-in successfully!.", HttpStatus.OK);
+        return new ResponseEntity<>("logged_in_success", HttpStatus.OK);
     }
 
     @PostMapping("/signup")
@@ -70,7 +70,7 @@ public class AuthController {
 
         usrRepository.save(user);
 
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        return new ResponseEntity<>("registered_success", HttpStatus.OK);
 
     }
 }

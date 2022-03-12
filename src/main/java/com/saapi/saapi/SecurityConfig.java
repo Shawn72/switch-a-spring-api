@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("shawn90").password("2950Cherry*30").roles("ADMIN");
+		auth.inMemoryAuthentication().withUser("userwolf").password("2022").roles("USER");
 	}
 
 	@Override
@@ -39,10 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		 	.antMatchers(HttpMethod.GET, "/api/**").permitAll()
 		 	.antMatchers("/api/auth/**").permitAll()
-		 	//.antMatchers("/api/users").hasAuthority("ROLE_ADMIN")
+		 	.antMatchers("/api/users").hasAuthority("ADMIN")
 		 	.anyRequest().fullyAuthenticated().and().httpBasic()
-		 	.and()
-		 	.exceptionHandling().accessDeniedPage("/403");		
+		 	.and().exceptionHandling().accessDeniedPage("/403");		
 	}
     
     
@@ -55,8 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //            .antMatchers("/api/auth/**").permitAll()
 //            // .antMatchers("/api/users").hasAuthority("ROLE_ADMIN")          
 //            .anyRequest().authenticated().and().httpBasic()
-//            .and()
-//            .exceptionHandling().accessDeniedPage("/403");
+//            .and().exceptionHandling().accessDeniedPage("/403");
 //    }
     
 //    @Override
