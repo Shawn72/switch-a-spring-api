@@ -3,16 +3,18 @@ package com.saapi.saapi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.saapi.saapi.model.AccountBalances;
 import com.saapi.saapi.model.FundsTransferTrx;
 import com.saapi.saapi.model.Users;
 import com.saapi.saapi.repository.*;
 
+@Service
 public class FundsTrxService {
 
-	 @Autowired
-	 FundsTransactionsRepository trxRepository;  
+ @Autowired
+ FundsTransactionsRepository trxRepository;  
  
  public FundsTrxService(FundsTransactionsRepository tranxRepository) {
      this.trxRepository = tranxRepository;
