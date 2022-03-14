@@ -30,7 +30,7 @@ public class AccountBalanceService {
     // UPDATE
      public AccountBalances updateAccountBalance(Integer accBal, AccountBalances acBalDetails) {
     	 AccountBalances accBalls = accbalRepository.findById(accBal).get();
-    	 accBalls.setAccount_id(acBalDetails.getAccount_id());
+    	 // accBalls.setAccount_id(acBalDetails.getAccount_id());
     	 accBalls.setBalance(acBalDetails.getBalance());               
          return accbalRepository.save(accBalls);                                
      }
